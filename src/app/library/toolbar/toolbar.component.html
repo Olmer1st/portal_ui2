@@ -1,0 +1,12 @@
+<div class="btn-toolbar bs-component">
+    <!-- <span class="glyphicon"
+                [ngClass]="{'glyphicon-chevron-left': sideBarIsOpen, 'glyphicon-chevron-right': !sideBarIsOpen}"
+                > </span>-->
+    <a class="btn btn-default" (click)="changeSideBarState()">
+        <img [src]="sideBarIconSource" />
+    </a>
+    <a class="btn btn-primary capitalize" *ngFor="let b of toolBarButtons"
+    (click)="changeActivity(b)"
+    [ngClass]="{'active': b.isActive}">{{b.key}}</a>
+    <language-selector></language-selector>
+</div>

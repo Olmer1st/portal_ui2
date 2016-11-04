@@ -1,0 +1,10 @@
+.library-table {
+    width: 100% !important;
+    border-collapse: separate !important;
+    border-spacing: 20px !important;
+}
+
+.libary-widget {
+    vertical-align: top;
+    padding: 10px;
+}

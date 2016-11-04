@@ -1,0 +1,12 @@
+.langButton {
+    width: 80px !important;
+}
+
+.langDropdown {
+    min-width: 75px !important;
+}
+
+:host {
+    margin-left: 5px;
+    display: inline-block;
+}

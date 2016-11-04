@@ -1,0 +1,11 @@
+<div class="btn-group" dropdown keyboardNav="true">
+    <button id="language-button" type="button" class="btn btn-primary langButton" dropdownToggle>
+                    {{selectedLanguage}}&nbsp;
+                    <span class="caret"></span>
+                </button>
+    <ul class="dropdown-menu langDropdown" dropdownMenu role="menu" aria-labelledby="language-button">
+        <li *ngFor="let choice of languages">
+            <a class="dropdown-item pointer" (click)="selectLanguage(choice)">{{choice}}</a>
+        </li>
+    </ul>
+</div>

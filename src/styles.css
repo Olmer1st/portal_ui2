@@ -1,0 +1,35 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #32435b;
+}
+
+.pointer {
+    cursor: pointer;
+    pointer-events: all !important;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.relative {
+    position: relative;
+}
+
+.padding20px {
+    padding: 20px;
+}
+
+.lowercase {
+    text-transform: lowercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+    ;
+}
+
+.w30 {
+    width: 30%;
+}
