@@ -1,6 +1,6 @@
 <div class="form-group has-feedback" (mouseover)="_hover=true" (mouseleave)="_hover=false">
     <label class="control-label">{{placeholder}}</label>
-    <input type="text"  [(ngModel)]="_searchParam" class="form-control" placeholder="{{placeholder}}" (keyup.enter)="SearchClick()"/>
-    <span *ngIf="_hover && _searchParam" class="form-control-feedback glyphicon glyphicon-remove pointer" style="right: 30px;" (click)="ClearClick()" ></span>
-    <span class="form-control-feedback glyphicon glyphicon-search pointer"  (click)="SearchClick()"></span>
+    <input type="text"  [(ngModel)]="searchParam" class="form-control" placeholder="{{placeholder}}" (keyup.enter)="searchClick()"/>
+    <span *ngIf="_hover && searchParam" class="form-control-feedback glyphicon glyphicon-remove pointer" style="right: 30px;" (click)="clearClick()" ></span>
+    <span class="form-control-feedback glyphicon glyphicon-search pointer"  (click)="searchClick()"></span>
 </div>

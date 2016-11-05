@@ -1,0 +1,24 @@
+<table class="table table-hover ">
+    <thead>
+        <tr>
+            <th class="w5">&nbsp;</th>
+            <th class="w5">&nbsp;</th>
+            <th class="w45">Title</th>
+            <th class="w5">#</th>
+            <th class="w15">Size</th>
+            <th class="w10">Languge</th>
+            <th class="w20">Genre</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let book of books">
+            <td class="w5">&nbsp;</td>
+            <td class="w5">&nbsp;</td>
+            <td class="w45">{{book.title}}</td>
+            <td class="w5">{{book.serno}}</td>
+            <td class="w15">{{book.size | fileSize}}</td>
+            <td class="w10">{{book.lang}}</td>
+            <td class="w20"><span class="dont-break-out">{{book.genre}}</span></td>
+        </tr>
+    </tbody>
+</table>

@@ -4,6 +4,14 @@ export enum SideBarState {
     Disabled = 2
 }
 
+export interface Node {
+    id:number;
+    title: string;
+    type: NodeType;
+    level: number;
+    bookInfo:BookInfo;
+};
+
 export enum NodeType {
     None = 0,
     Book = 1,
@@ -24,13 +32,6 @@ export interface BookInfo {
     genre:string;
 };
 
-export interface Node {
-    id:number;
-    title: string;
-    type: NodeType;
-    level: number;
-    bookInfo:BookInfo;
-};
 
 export interface Author {
     aid:number;
@@ -40,4 +41,5 @@ export interface Author {
 export interface ToolBarButton {
     key:string;
     isActive:boolean;
+    customInfo:any;
 }

@@ -16,11 +16,16 @@ import {LibraryComponent} from '../library/library.component';
 import {HomeComponent} from '../home/home.component';
 import {ToolbarComponent} from '../library/toolbar/toolbar.component';
 import {LanguageComponent} from '../library/language/language.component';
+import {AuthorsComponent} from '../library/authors/authors.component';
+import {AuthorInfoComponent} from '../library/authors/author.info.component';
+import {BooksComponent} from '../library/books/books.component';
+
 
 import {PortalRoutes} from './portal.routes';
 import {APP_CONFIG, PORTAL_CONFIG} from './portal.providers';
 import {LibraryService} from '../library/library.service';
 import {EmitterService} from '../shared/emitter.service';
+import { FileSizePipe } from '../shared/filesize.pipe';
 
 @NgModule({
     imports: [
@@ -42,7 +47,11 @@ import {EmitterService} from '../shared/emitter.service';
         ToolbarComponent,
         SearchboxComponent,
         SpinnerComponent,
-        LanguageComponent
+        LanguageComponent,
+        AuthorsComponent,
+        AuthorInfoComponent,
+        BooksComponent,
+        FileSizePipe
     ],
     providers: [
         { provide: APP_CONFIG, useValue: PORTAL_CONFIG },

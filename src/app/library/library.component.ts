@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
 import {LibraryService} from './library.service';
-import {ToolBarButton, SideBarState} from './library.models';
+import {ToolBarButton, SideBarState, Author, BookInfo} from './library.models';
 import {EmitterService} from '../shared/emitter.service';
 
 @Component({
@@ -13,6 +13,9 @@ export class LibraryComponent implements OnDestroy, OnInit {
     private _sideBarState: SideBarState = SideBarState.Disabled;
     mainWidgetSize: string = "70%";
     currentActivity: ToolBarButton = null;
+    author:Author = null;
+    books:BookInfo[] = [];
+    language:string = "ru";
     private _onLanguageChangedSubscribtion: any = null;
     constructor(private _libraryService: LibraryService) {
     }
@@ -26,11 +29,31 @@ export class LibraryComponent implements OnDestroy, OnInit {
         this.currentActivity = button;
     }
     onLanguageChanged(lang: string): void {
-        console.log(lang);
+        this.language = lang;
+        this.loadBooks();
     }
     onSideBarStateChanged(state: SideBarState): void {
         this.mainWidgetSize = (state === SideBarState.Opened) ? "70%" : "100%";
         this._sideBarState = state;
+    }
+    onAuthorClicked(author: Author): void {
+        this.author = author;
+        this.loadBooks();
+    }
+
+    private loadBooks(): void {
+        if (!this.author) {
+            return;
+        }
+        this._libraryService.getBooksByAuthorId(this.author.aid, this.language)
+            .subscribe(booksInfo => {
+                //console.log(booksInfo);
+                this.books = booksInfo.books;
+            }, //Bind to view
+            err => {
+                // Log errors if any
+                console.log(err);
+            });
     }
     ngOnInit(): void {
         this._onLanguageChangedSubscribtion = EmitterService

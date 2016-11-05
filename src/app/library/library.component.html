@@ -2,10 +2,20 @@
 <table class="library-table">
     <tr>
         <td class="libary-widget w30" *ngIf="isSideBarStateOpen">
-            {{currentActivityKey}}
+            <div [ngSwitch]="currentActivityKey">
+                <template [ngSwitchCase]="'authors'">
+                    <authors-section (onAuthorClicked)="onAuthorClicked($event)" [activity]="currentActivity"></authors-section>
+                </template>
+                <div *ngSwitchCase="'series'">{{currentActivityKey}}</div>
+                <div *ngSwitchCase="'genres'">{{currentActivityKey}}</div>
+                <div *ngSwitchCase="'search'">{{currentActivityKey}}</div>
+            </div>
         </td>
         <td [style.width]="mainWidgetSize" class="libary-widget">
-            books
+            <div>
+                <author-info [author]="author"></author-info>
+                <books-section [books]="books"></books-section>
+            </div>
         </td>
     </tr>
 </table>

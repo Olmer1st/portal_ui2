@@ -15,29 +15,30 @@ export class SearchboxComponent {
     _hover: boolean = false;
 
     @Input()
-    set placeholder(name: string) {
+    set placeholder(name: string){
         this._name = (name && name.trim()) || '';
     }
-    get placeholder() {
+    get placeholder(): string {
         if (this._name) {
             return _label + " " + this._name;
         }
         return _label;
     }
-    set searchParam(s: string) {
+    @Input()
+    set searchParam(s: string){
         this._searchParam = s;
     }
-    get searchParam() {
+    get searchParam(): string {
         return this._searchParam;
     }
 
     @Output() onSearch = new EventEmitter<string>();
     @Output() onClear = new EventEmitter();
 
-    searchClick() {
+    searchClick(): void {
         this.onSearch.emit(this._searchParam);
     }
-    clearClick() {
+    clearClick(): void {
         this.onClear.emit();
         this._searchParam = "";
     }

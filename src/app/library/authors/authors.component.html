@@ -1,0 +1,14 @@
+<table class="w100">
+    <tr>
+        <td>
+            <searchbox-section placeholder="Authors" (onSearch)="onSearchClicked($event)" (onClear)="onClearClicked()" [searchParam]="searchParam"></searchbox-section>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="list-group">
+                <a class="pointer list-group-item" *ngFor="let author of authors" (click)="authorClick(author)" [ngClass]="{'active': (selectedAuthor)?author.aid === selectedAuthor.aid:false}">{{author.fullname}}</a>
+            </div>
+        </td>
+    </tr>
+</table>

@@ -12,10 +12,10 @@ const sideBarIconSources = {
 export class ToolbarComponent implements OnInit {
     sideBarState: SideBarState = SideBarState.Opened;
     toolBarButtons: ToolBarButton[] = [
-        { key: "authors", isActive: true },
-        { key: "genres", isActive: false },
-        { key: "series", isActive: false },
-        { key: "search", isActive: false }
+        { key: "authors", isActive: true, customInfo: {} },
+        { key: "genres", isActive: false, customInfo: {} },
+        { key: "series", isActive: false, customInfo: {} },
+        { key: "search", isActive: false, customInfo: {} }
     ];
     @Output() onActivityChanged = new EventEmitter<ToolBarButton>();
     @Output() onSideBarStateChanged = new EventEmitter<SideBarState>();
