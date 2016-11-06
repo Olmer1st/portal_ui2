@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
 import {LibraryService} from './library.service';
-import {ToolBarButton, SideBarState, Author, BookInfo} from './library.models';
+import {ToolBarButton, SideBarState, Author, TreeInfo} from './library.models';
 import {EmitterService} from '../shared/emitter.service';
 
 @Component({
@@ -13,9 +13,13 @@ export class LibraryComponent implements OnDestroy, OnInit {
     private _sideBarState: SideBarState = SideBarState.Disabled;
     mainWidgetSize: string = "70%";
     currentActivity: ToolBarButton = null;
-    author:Author = null;
-    books:BookInfo[] = [];
-    language:string = "ru";
+    author: Author = null;
+    treeInfo: TreeInfo = {
+        totalIds: 0,
+        totalBooks: 0,
+        treeData: []
+    };
+    language: string = "ru";
     private _onLanguageChangedSubscribtion: any = null;
     constructor(private _libraryService: LibraryService) {
     }
@@ -45,10 +49,10 @@ export class LibraryComponent implements OnDestroy, OnInit {
         if (!this.author) {
             return;
         }
-        this._libraryService.getBooksByAuthorId(this.author.aid, this.language)
-            .subscribe(booksInfo => {
+        this._libraryService.getNodesByAuthorId(this.author.aid, this.language)
+            .subscribe(treeInfo => {
                 //console.log(booksInfo);
-                this.books = booksInfo.books;
+                this.treeInfo = treeInfo;
             }, //Bind to view
             err => {
                 // Log errors if any

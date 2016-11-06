@@ -1,6 +1,7 @@
 import {Component, OnDestroy, EventEmitter, Input} from '@angular/core';
 import {EmitterService} from '../../shared/emitter.service';
-import {Node, BookInfo} from '../library.models';
+import {TreeInfo, Node, BookInfo} from '../library.models';
+import { TooltipModule } from 'ng2-bootstrap/components/tooltip';
 
 @Component({
     moduleId: module.id,
@@ -9,7 +10,7 @@ import {Node, BookInfo} from '../library.models';
     styleUrls: ["books.component.css"]
 })
 export class BooksComponent {
-    @Input() books: BookInfo[] = [];
+    @Input() treeData: Node[] = [];
     constructor() {
 
     }

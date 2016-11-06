@@ -5,11 +5,12 @@ import { Author } from '../library.models';
     selector: "author-info",
     template: `
         <h3>{{fullName}}</h3>
+        <h5>Available books: {{booksCount}}</h5>
     `
 })
 export class AuthorInfoComponent {
     @Input() author: Author = null;
-
+    @Input() booksCount: number = 0;
     constructor() {
     }
     get fullName(): string {

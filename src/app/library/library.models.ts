@@ -4,42 +4,48 @@ export enum SideBarState {
     Disabled = 2
 }
 
+export interface TreeInfo {
+    totalIds: number;
+    totalBooks: number;
+    treeData: Node[];
+}
 export interface Node {
-    id:number;
+    id: number;
     title: string;
     type: NodeType;
     level: number;
-    bookInfo:BookInfo;
-};
+    collapsed:boolean;
+    bookInfo: BookInfo;
+}
 
 export enum NodeType {
     None = 0,
     Book = 1,
     Author = 2,
     Serie = 3
-};
+}
 
 export interface BookInfo {
-    title: string;
-    size:number;
-    serno:number;
-    lang:string;
-    del:boolean;
-    path:string;
-    file:number;
-    date:string;
-    ext:string;
-    genre:string;
-};
+    series: string;
+    size: number;
+    serno: number;
+    lang: string;
+    del: any;
+    path: string;
+    file: number;
+    date: string;
+    ext: string;
+    genre: string;
+}
 
 
 export interface Author {
-    aid:number;
-    fullname:string;
-};
+    aid: number;
+    fullname: string;
+}
 
 export interface ToolBarButton {
-    key:string;
-    isActive:boolean;
-    customInfo:any;
+    key: string;
+    isActive: boolean;
+    customInfo: any;
 }

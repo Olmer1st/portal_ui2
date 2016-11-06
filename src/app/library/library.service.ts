@@ -1,6 +1,6 @@
 import { Injectable, Inject }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Author, Node }  from './library.models';
+import { Author, Node, TreeInfo }  from './library.models';
 import { APP_CONFIG, AppConfig } from '../portal/portal.providers';
 import {Observable} from 'rxjs/Rx';
 
@@ -26,7 +26,7 @@ export class LibraryService {
             .catch((error: any) => Observable.throw(error || 'Server error'));
 
     }
-    getBooksByAuthorId(aid: number, lang: string): Observable<any> {
+    getNodesByAuthorId(aid: number, lang: string): Observable<TreeInfo> {
         const url = this.config.apiRootUrl + "library/books/author/" + aid + "/" + lang;
         // ...using get request
         return this.http.get(url)

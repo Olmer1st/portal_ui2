@@ -13,3 +13,7 @@
     -webkit-hyphens: auto;
     hyphens: auto;
 }
+
+tooltip-container>.tooltip>.tooltip-inner {
+  max-width: 600px !important;
+}

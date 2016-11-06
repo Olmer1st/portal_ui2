@@ -1,24 +1,35 @@
+<template #toolTipTemplate let-model="model">
+  <h4>Tool tip custom content defined inside a template</h4>
+  <h5>With context binding: {{(model) ? model.genre : ""}}</h5>
+</template>
+
 <table class="table table-hover ">
     <thead>
         <tr>
             <th class="w5">&nbsp;</th>
-            <th class="w5">&nbsp;</th>
-            <th class="w45">Title</th>
+            <th class="w55">Title</th>
             <th class="w5">#</th>
             <th class="w15">Size</th>
-            <th class="w10">Languge</th>
-            <th class="w20">Genre</th>
+            <!-- <th class="w10">Languge</th> -->
+            <th class="w20">Inserted Date</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let book of books">
+        <tr *ngFor="let node of treeData" [tooltipHtml]="toolTipTemplate"
+                                    [tooltipContext]="node.bookInfo" [tooltipEnable]="node.type==1">
             <td class="w5">&nbsp;</td>
-            <td class="w5">&nbsp;</td>
-            <td class="w45">{{book.title}}</td>
-            <td class="w5">{{book.serno}}</td>
-            <td class="w15">{{book.size | fileSize}}</td>
-            <td class="w10">{{book.lang}}</td>
-            <td class="w20"><span class="dont-break-out">{{book.genre}}</span></td>
+            <td class="w55">
+                <div [ngStyle]="{'margin-left': (node.level * 45).toString() + 'px'}" class="pointer" >
+                    <span *ngIf="node.type>1">
+                        <span  aria-hidden="true" class="glyphicon" [ngClass]="!node.collapsed?'glyphicon-minus':'glyphicon-plus'"></span>&nbsp;&nbsp;
+                    </span>
+                    <span>{{node.title}}</span>
+                </div>
+            </td>
+            <td class="w5">{{(node.bookInfo) ? node.bookInfo.serno: ""}}</td>
+            <td class="w15">{{(node.bookInfo) ? (node.bookInfo.size | fileSize) : ""}}</td>
+            <!-- <td class="w10">{{(node.bookInfo) ? node.bookInfo.lang : ""}}</td> -->
+            <td class="w20">{{(node.bookInfo) ? node.bookInfo.date : ""}}</td>
         </tr>
     </tbody>
 </table>
