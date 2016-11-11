@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
 import {LibraryService} from './library.service';
-import {ToolBarButton, SideBarState, Author, TreeInfo} from './library.models';
+import {ToolBarButton, SideBarState, Author, TreeInfo, GenreGroup} from './library.models';
 import {EmitterService} from '../shared/emitter.service';
 
 @Component({
@@ -13,11 +13,13 @@ export class LibraryComponent implements OnDestroy, OnInit {
     private _sideBarState: SideBarState = SideBarState.Disabled;
     mainWidgetSize: string = "70%";
     currentActivity: ToolBarButton = null;
+    genreGroups: GenreGroup[] = [];
     author: Author = null;
     treeInfo: TreeInfo = {
         totalIds: 0,
         totalBooks: 0,
-        treeData: []
+        treeData: [],
+        maxLevel: -1
     };
     language: string = "ru";
     private _onLanguageChangedSubscribtion: any = null;
@@ -44,7 +46,10 @@ export class LibraryComponent implements OnDestroy, OnInit {
         this.author = author;
         this.loadBooks();
     }
-
+    private loadGenres(): void {
+        this._libraryService.getGenres()
+            .subscribe(groups => this.genreGroups = groups, err => console.error(err));
+    }
     private loadBooks(): void {
         if (!this.author) {
             return;
@@ -63,9 +68,10 @@ export class LibraryComponent implements OnDestroy, OnInit {
         this._onLanguageChangedSubscribtion = EmitterService
             .get<string>("onLanguageChanged")
             .subscribe(event => this.onLanguageChanged(event));
+        this.loadGenres();
     }
 
     ngOnDestroy(): void {
-        this._onLanguageChangedSubscribtion.unsubscribe();
+        this._onLanguageChangedSubscribtion && this._onLanguageChangedSubscribtion.unsubscribe();
     }
 }

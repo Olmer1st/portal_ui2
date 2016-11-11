@@ -14,7 +14,7 @@
         <td [style.width]="mainWidgetSize" class="libary-widget">
             <div>
                 <author-info [author]="author" [booksCount]="treeInfo.totalBooks"></author-info>
-                <books-section [treeData]="treeInfo.treeData"></books-section>
+                <books-section [treeData]="treeInfo.treeData" [maxLevel]="treeInfo.maxLevel" [genresData]="genreGroups"></books-section>
             </div>
         </td>
     </tr>

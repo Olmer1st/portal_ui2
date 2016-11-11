@@ -58,3 +58,9 @@ body {
 .w20 {
     width: 20%;
 }
+
+.max-div-height{
+    max-height: 800px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}

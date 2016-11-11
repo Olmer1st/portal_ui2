@@ -1,9 +1,17 @@
 <template #toolTipTemplate let-model="model">
-  <h4>Tool tip custom content defined inside a template</h4>
-  <h5>With context binding: {{(model) ? model.genre : ""}}</h5>
+    <div *ngIf="model.book && model.genres">
+        <h5>Language: <span><strong>{{ model.book.lang}}</strong></span></h5>
+        <hr />
+        <span *ngIf="model.book.genre">
+            <h5>Genre: </h5>
+            <div *ngFor="let code of model.book.genre.split(':')">
+                 {{(model.genres[code])?model.genres[code].gdesc:""}}
+             </div>
+        </span>
+    </div>
 </template>
 
-<table class="table table-hover ">
+<table class="table table-condensed table-responsive table-hover scroll">
     <thead>
         <tr>
             <th class="w5">&nbsp;</th>
@@ -15,21 +23,22 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let node of treeData" [tooltipHtml]="toolTipTemplate"
-                                    [tooltipContext]="node.bookInfo" [tooltipEnable]="node.type==1">
-            <td class="w5">&nbsp;</td>
-            <td class="w55">
-                <div [ngStyle]="{'margin-left': (node.level * 45).toString() + 'px'}" class="pointer" >
-                    <span *ngIf="node.type>1">
-                        <span  aria-hidden="true" class="glyphicon" [ngClass]="!node.collapsed?'glyphicon-minus':'glyphicon-plus'"></span>&nbsp;&nbsp;
-                    </span>
-                    <span>{{node.title}}</span>
-                </div>
-            </td>
-            <td class="w5">{{(node.bookInfo) ? node.bookInfo.serno: ""}}</td>
-            <td class="w15">{{(node.bookInfo) ? (node.bookInfo.size | fileSize) : ""}}</td>
-            <!-- <td class="w10">{{(node.bookInfo) ? node.bookInfo.lang : ""}}</td> -->
-            <td class="w20">{{(node.bookInfo) ? node.bookInfo.date : ""}}</td>
-        </tr>
+        <template ngFor let-node [ngForOf]="treeData">
+            <tr *ngIf="!node.hidden" [tooltipHtml]="toolTipTemplate" [tooltipContext]="{book:node.bookInfo, genres:genres}" [tooltipEnable]="node.type==1">
+                <td class="w5">&nbsp;</td>
+                <td class="w55">
+                    <div [ngStyle]="{'margin-left': (node.level * 45).toString() + 'px'}" >
+                        <span *ngIf="node.type>1">
+                            <span  aria-hidden="true" class="pointer glyphicon" [ngClass]="!node.collapsed?'glyphicon-minus':'glyphicon-plus'" (click)="collapseKids(node)"></span>&nbsp;&nbsp;
+                        </span>
+                        <span>{{node.title}}</span>
+                    </div>
+                </td>
+                <td class="w5">{{(node.bookInfo) ? node.bookInfo.serno: ""}}</td>
+                <td class="w15">{{(node.bookInfo) ? (node.bookInfo.size | fileSize) : ""}}</td>
+                <!-- <td class="w10">{{(node.bookInfo) ? node.bookInfo.lang : ""}}</td> -->
+                <td class="w20">{{(node.bookInfo) ? node.bookInfo.date : ""}}</td>
+            </tr>
+        </template>
     </tbody>
 </table>

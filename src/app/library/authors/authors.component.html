@@ -6,7 +6,7 @@
     </tr>
     <tr>
         <td>
-            <div class="list-group">
+            <div class="list-group max-div-height">
                 <a class="pointer list-group-item" *ngFor="let author of authors" (click)="authorClick(author)" [ngClass]="{'active': (selectedAuthor)?author.aid === selectedAuthor.aid:false}">{{author.fullname}}</a>
             </div>
         </td>

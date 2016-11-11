@@ -7,15 +7,31 @@ export enum SideBarState {
 export interface TreeInfo {
     totalIds: number;
     totalBooks: number;
+    maxLevel: number;
     treeData: Node[];
 }
+
+export interface GenreGroup {
+    details: GenreInfo;
+    genres: GenreInfo[];
+}
+
+export interface GenreInfo {
+    gid: number;
+    code: string;
+    gdesc: string;
+    edesc: string;
+}
+
 export interface Node {
-    id: number;
+    id: string;
     title: string;
     type: NodeType;
     level: number;
-    collapsed:boolean;
+    collapsed: boolean;
     bookInfo: BookInfo;
+    parent: string;
+    hidden: boolean;
 }
 
 export enum NodeType {

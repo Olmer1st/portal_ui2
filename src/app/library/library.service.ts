@@ -1,6 +1,6 @@
 import { Injectable, Inject }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Author, Node, TreeInfo }  from './library.models';
+import { Author, Node, TreeInfo , GenreGroup}  from './library.models';
 import { APP_CONFIG, AppConfig } from '../portal/portal.providers';
 import {Observable} from 'rxjs/Rx';
 
@@ -38,6 +38,15 @@ export class LibraryService {
     }
     getLanguages(): Observable<string[]> {
         const url = this.config.apiRootUrl + "library/languages";
+        // ...using get request
+        return this.http.get(url)
+            // ...and calling .json() on the response to return data
+            .map((res: Response) => res.json())
+            //...errors if any
+            .catch((error: any) => Observable.throw(error || 'Server error'));
+    }
+    getGenres(): Observable<GenreGroup[]> {
+        const url = this.config.apiRootUrl + "library/genres";
         // ...using get request
         return this.http.get(url)
             // ...and calling .json() on the response to return data
