@@ -7,13 +7,25 @@
                     <authors-section (onAuthorClicked)="onAuthorClicked($event)" [activity]="currentActivity"></authors-section>
                 </template>
                 <div *ngSwitchCase="'series'">{{currentActivityKey}}</div>
-                <div *ngSwitchCase="'genres'">{{currentActivityKey}}</div>
+                <template [ngSwitchCase]="'genres'">
+                    <genres-section (onGenreClicked)="onGenreClicked($event)" [activity]="currentActivity" [genresData]="genreGroups" [multiSelect]="false"></genres-section>
+                </template>
                 <div *ngSwitchCase="'search'">{{currentActivityKey}}</div>
             </div>
         </td>
         <td [style.width]="mainWidgetSize" class="libary-widget">
             <div>
-                <author-info [author]="author" [booksCount]="treeInfo.totalBooks"></author-info>
+                <div [ngSwitch]="currentActivityKey">
+                    <template [ngSwitchCase]="'authors'">
+                        <author-info [author]="author" [booksCount]="treeInfo.totalBooks"></author-info>
+                    </template>
+                    <div *ngSwitchCase="'series'">{{currentActivityKey}}</div>
+                    <template [ngSwitchCase]="'genres'">
+                        <genre-info [genre]="genre" [booksCount]="treeInfo.totalBooks"></genre-info>
+                    </template>
+                    <div *ngSwitchCase="'search'">{{currentActivityKey}}</div>
+                </div>
+
                 <books-section [treeData]="treeInfo.treeData" [maxLevel]="treeInfo.maxLevel" [genresData]="genreGroups"></books-section>
             </div>
         </td>

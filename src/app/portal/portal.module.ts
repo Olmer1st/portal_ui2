@@ -18,6 +18,8 @@ import {ToolbarComponent} from '../library/toolbar/toolbar.component';
 import {LanguageComponent} from '../library/language/language.component';
 import {AuthorsComponent} from '../library/authors/authors.component';
 import {AuthorInfoComponent} from '../library/authors/author.info.component';
+import {GenresComponent} from '../library/genres/genres.component';
+import {GenreInfoComponent} from '../library/genres/genre.info.component';
 import {BooksComponent} from '../library/books/books.component';
 
 
@@ -26,6 +28,7 @@ import {APP_CONFIG, PORTAL_CONFIG} from './portal.providers';
 import {LibraryService} from '../library/library.service';
 import {EmitterService} from '../shared/emitter.service';
 import { FileSizePipe } from '../shared/filesize.pipe';
+import { GenreFilterPipe } from '../library/genres/genre.filter.pipe';
 
 @NgModule({
     imports: [
@@ -51,7 +54,10 @@ import { FileSizePipe } from '../shared/filesize.pipe';
         AuthorsComponent,
         AuthorInfoComponent,
         BooksComponent,
-        FileSizePipe
+        FileSizePipe,
+        GenreFilterPipe,
+        GenresComponent,
+        GenreInfoComponent,
     ],
     providers: [
         { provide: APP_CONFIG, useValue: PORTAL_CONFIG },

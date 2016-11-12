@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
 import {LibraryService} from './library.service';
-import {ToolBarButton, SideBarState, Author, TreeInfo, GenreGroup} from './library.models';
+import {ToolBarButton, SideBarState, Author, TreeInfo, GenreGroup, GenreInfo} from './library.models';
 import {EmitterService} from '../shared/emitter.service';
 
 @Component({
@@ -15,6 +15,7 @@ export class LibraryComponent implements OnDestroy, OnInit {
     currentActivity: ToolBarButton = null;
     genreGroups: GenreGroup[] = [];
     author: Author = null;
+    genre: GenreInfo = null;
     treeInfo: TreeInfo = {
         totalIds: 0,
         totalBooks: 0,
@@ -41,6 +42,9 @@ export class LibraryComponent implements OnDestroy, OnInit {
     onSideBarStateChanged(state: SideBarState): void {
         this.mainWidgetSize = (state === SideBarState.Opened) ? "70%" : "100%";
         this._sideBarState = state;
+    }
+    onGenreClicked(genre:GenreInfo): void {
+        this.genre = genre;
     }
     onAuthorClicked(author: Author): void {
         this.author = author;
