@@ -23,6 +23,7 @@ export class LibraryComponent implements OnDestroy, OnInit {
         maxLevel: -1
     };
     language: string = "ru";
+    loadingData: boolean = false;
     private _onLanguageChangedSubscribtion: any = null;
     constructor(private _libraryService: LibraryService) {
     }
@@ -43,8 +44,9 @@ export class LibraryComponent implements OnDestroy, OnInit {
         this.mainWidgetSize = (state === SideBarState.Opened) ? "70%" : "100%";
         this._sideBarState = state;
     }
-    onGenreClicked(genre:GenreInfo): void {
+    onGenreClicked(genre: GenreInfo): void {
         this.genre = genre;
+        this.loadBooks();
     }
     onAuthorClicked(author: Author): void {
         this.author = author;
@@ -55,18 +57,46 @@ export class LibraryComponent implements OnDestroy, OnInit {
             .subscribe(groups => this.genreGroups = groups, err => console.error(err));
     }
     private loadBooks(): void {
-        if (!this.author) {
-            return;
+        switch (this.currentActivityKey) {
+            case "authors":
+                if (!this.author) {
+                    return;
+                }
+                this.loadingData = true;
+                this._libraryService.getNodesByAuthorId(this.author.aid, this.language)
+                    .subscribe(treeInfo => {
+                        //console.log(booksInfo);
+                        this.treeInfo = treeInfo;
+                        this.loadingData = false;
+                    }, //Bind to view
+                    err => {
+                        // Log errors if any
+                        console.log(err);
+                        this.loadingData = false;
+                    });
+                break;
+            case "genres":
+                if (!this.genre) {
+                    return;
+                }
+                this.loadingData = true;
+                this._libraryService.getNodesByGenreId(this.genre.gid, this.language)
+                    .subscribe(treeInfo => {
+                        //console.log(booksInfo);
+                        this.treeInfo = treeInfo;
+                        this.loadingData = false;
+                    }, //Bind to view
+                    err => {
+                        // Log errors if any
+                        console.log(err);
+                        this.loadingData = false;
+                    });
+                break;
+            default:
+                this.loadingData = false;
         }
-        this._libraryService.getNodesByAuthorId(this.author.aid, this.language)
-            .subscribe(treeInfo => {
-                //console.log(booksInfo);
-                this.treeInfo = treeInfo;
-            }, //Bind to view
-            err => {
-                // Log errors if any
-                console.log(err);
-            });
+
+
     }
     ngOnInit(): void {
         this._onLanguageChangedSubscribtion = EmitterService

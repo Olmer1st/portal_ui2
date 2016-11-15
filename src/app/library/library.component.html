@@ -14,7 +14,9 @@
             </div>
         </td>
         <td [style.width]="mainWidgetSize" class="libary-widget">
-            <div>
+            <spinner-section *ngIf="loadingData"></spinner-section>
+            <div *ngIf="!loadingData">
+
                 <div [ngSwitch]="currentActivityKey">
                     <template [ngSwitchCase]="'authors'">
                         <author-info [author]="author" [booksCount]="treeInfo.totalBooks"></author-info>

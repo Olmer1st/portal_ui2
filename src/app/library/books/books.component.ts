@@ -52,7 +52,7 @@ export class BooksComponent implements OnChanges {
     }
     ngOnChanges(changes: SimpleChanges): void {
         let propgenresData = changes["genresData"];
-        if (propgenresData && !propgenresData.isFirstChange()) {
+        if (propgenresData && propgenresData.currentValue) {
             this.genresObject = this.genresData.reduce((obj, genreGroup) => {
                 genreGroup.genres.forEach(genre => {
                     obj[genre.code] = genre;

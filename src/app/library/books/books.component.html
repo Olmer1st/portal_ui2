@@ -1,5 +1,6 @@
 <template #toolTipTemplate let-model="model">
     <div *ngIf="model.book && model.genres">
+            <!-- {{model | json}} -->
         <h5>Language: <span><strong>{{ model.book.lang}}</strong></span></h5>
         <hr />
         <span *ngIf="model.book.genre">

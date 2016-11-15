@@ -36,6 +36,16 @@ export class LibraryService {
             .catch((error: any) => Observable.throw(error || 'Server error'));
 
     }
+    getNodesByGenreId(gid: number, lang: string): Observable<TreeInfo> {
+        const url = this.config.apiRootUrl + "library/books/genre/" + gid + "/" + lang;
+        // ...using get request
+        return this.http.get(url)
+            // ...and calling .json() on the response to return data
+            .map((res: Response) => res.json())
+            //...errors if any
+            .catch((error: any) => Observable.throw(error || 'Server error'));
+
+    }
     getLanguages(): Observable<string[]> {
         const url = this.config.apiRootUrl + "library/languages";
         // ...using get request
