@@ -1,6 +1,5 @@
-<template #toolTipTemplate let-model="model">
+<!-- <template #toolTipTemplate let-model="model">
     <div *ngIf="model.book && model.genres">
-            <!-- {{model | json}} -->
         <h5>Language: <span><strong>{{ model.book.lang}}</strong></span></h5>
         <hr />
         <span *ngIf="model.book.genre">
@@ -19,7 +18,6 @@
             <th class="w55">Title</th>
             <th class="w5">#</th>
             <th class="w15">Size</th>
-            <!-- <th class="w10">Languge</th> -->
             <th class="w20">Inserted Date</th>
         </tr>
     </thead>
@@ -37,9 +35,15 @@
                 </td>
                 <td class="w5">{{(node.bookInfo) ? node.bookInfo.serno: ""}}</td>
                 <td class="w15">{{(node.bookInfo) ? (node.bookInfo.size | fileSize) : ""}}</td>
-                <!-- <td class="w10">{{(node.bookInfo) ? node.bookInfo.lang : ""}}</td> -->
                 <td class="w20">{{(node.bookInfo) ? node.bookInfo.date : ""}}</td>
             </tr>
         </template>
     </tbody>
-</table>
+</table> -->
+
+<p-treeTable [value]="files" selectionMode="multiple" [(selection)]="selectedFiles"
+    (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)">
+    <p-column field="name" header="Name"></p-column>
+    <p-column field="size" header="Size"></p-column>
+    <p-column field="type" header="Type"></p-column>
+</p-treeTable>

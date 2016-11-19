@@ -80,7 +80,7 @@ export class LibraryComponent implements OnDestroy, OnInit {
                     return;
                 }
                 this.loadingData = true;
-                this._libraryService.getNodesByGenreId(this.genre.gid, this.language)
+                this._libraryService.getNodesByGenreCode(this.genre.code, this.language)
                     .subscribe(treeInfo => {
                         //console.log(booksInfo);
                         this.treeInfo = treeInfo;

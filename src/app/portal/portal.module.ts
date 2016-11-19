@@ -21,7 +21,7 @@ import {AuthorInfoComponent} from '../library/authors/author.info.component';
 import {GenresComponent} from '../library/genres/genres.component';
 import {GenreInfoComponent} from '../library/genres/genre.info.component';
 import {BooksComponent} from '../library/books/books.component';
-
+import {TreeTableModule, SharedModule} from 'primeng/primeng';
 
 import {PortalRoutes} from './portal.routes';
 import {APP_CONFIG, PORTAL_CONFIG} from './portal.providers';
@@ -38,7 +38,9 @@ import { GenreFilterPipe } from '../library/genres/genre.filter.pipe';
         PortalRoutes,
         Ng2BootstrapModule,
         HttpModule,
-        JsonpModule
+        JsonpModule,
+        TreeTableModule,
+        SharedModule
     ],
     declarations: [
         PortalComponent,

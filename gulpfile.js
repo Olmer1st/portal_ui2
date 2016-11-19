@@ -33,7 +33,9 @@ gulp.task("compile", ["tslint"], () => {
         .pipe(sourcemaps.init())
         .pipe(tsProject());
     return tsResult.js
-        .pipe(sourcemaps.write(".", { sourceRoot: '/src' }))
+        .pipe(sourcemaps.write(".", {
+            sourceRoot: '/src'
+        }))
         .pipe(gulp.dest("build"));
 });
 
@@ -45,21 +47,46 @@ gulp.task("resources", () => {
         .pipe(gulp.dest("build"));
 });
 
+gulp.task("font-awesome", () => {
+    return gulp.src(["font-awesome/css/**","font-awesome/fonts/**"], {
+            cwd: "node_modules/**"
+        })
+        .pipe(gulp.dest("build/assets"));
+});
+
+gulp.task("bootstrap", () => {
+    return gulp.src(["fonts/**"], {
+            cwd: "node_modules/bootstrap/dist"
+        })
+        .pipe(gulp.dest("build/assets/bootstrap/fonts"));
+});
+
+gulp.task("primeng", () => {
+    return gulp.src(["resources/themes/afterdark/**",
+            "resources/primeng.min.css"
+        ], {
+            cwd: "node_modules/primeng"
+        })
+        .pipe(gulp.dest("build/assets/primeng"));
+});
 /**
  * Copy all required libraries into build directory.
  */
 gulp.task("libs", () => {
     return gulp.src([
-        'core-js/client/shim.min.js',
-        'systemjs/dist/system-polyfills.js',
-        'systemjs/dist/system.src.js',
-        'reflect-metadata/Reflect.js',
-        'rxjs/**/*.js',
-        'zone.js/dist/**',
-        '@angular/**/bundles/**',
-        'ng2-bootstrap/bundles/**',
-        'moment/min/moment-with-locales.js'
-    ], { cwd: "node_modules/**" }) /* Glob required here. */
+            'core-js/client/shim.min.js',
+            'systemjs/dist/system-polyfills.js',
+            'systemjs/dist/system.src.js',
+            'reflect-metadata/Reflect.js',
+            'rxjs/**/*.js',
+            'zone.js/dist/**',
+            '@angular/**/bundles/**',
+            'ng2-bootstrap/bundles/**',
+            'moment/min/moment-with-locales.js',
+            'primeng/**/*.js'
+        ], {
+            cwd: "node_modules/**"
+        }) /* Glob required here. */
         .pipe(gulp.dest("build/lib"));
 });
 
@@ -78,6 +105,6 @@ gulp.task('watch', function() {
 /**
  * Build the project.
  */
-gulp.task("build", ['compile', 'resources', 'libs'], () => {
+gulp.task("build", ['compile', 'resources', 'bootstrap', 'font-awesome', 'primeng', 'libs'], () => {
     console.log("Building the project ...");
 });

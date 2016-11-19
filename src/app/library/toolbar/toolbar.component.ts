@@ -1,8 +1,8 @@
 import {Component, Output, EventEmitter, OnInit} from '@angular/core';
 import {SideBarState, ToolBarButton } from '../library.models';
 const sideBarIconSources = {
-    Closed: "/media/list-view-24.png",
-    Opened: "/media/side-right-view-24.png"
+    Closed: "/assets/media/list-view-24.png",
+    Opened: "/assets/media/side-right-view-24.png"
 };
 @Component({
     moduleId: module.id,

@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnChanges, SimpleChanges, EventEmitter, Input} fro
 import {EmitterService} from '../../shared/emitter.service';
 import {TreeInfo, Node, BookInfo, GenreGroup, GenreInfo} from '../library.models';
 import { TooltipModule } from 'ng2-bootstrap/components/tooltip';
+import {TreeNode} from 'primeng/primeng';
 
 @Component({
     moduleId: module.id,
@@ -10,6 +11,88 @@ import { TooltipModule } from 'ng2-bootstrap/components/tooltip';
     styleUrls: ["books.component.css"]
 })
 export class BooksComponent implements OnChanges {
+    selectedFiles: TreeNode[];
+    files: TreeNode[] =
+    [
+        {
+            "data": {
+                "name": "Documents",
+                "size": "75kb",
+                "type": "Folder"
+            },
+            "children": [
+                {
+                    "data": {
+                        "name": "Work",
+                        "size": "55kb",
+                        "type": "Folder"
+                    },
+                    "children": [
+                        {
+                            "data": {
+                                "name": "Expenses.doc",
+                                "size": "30kb",
+                                "type": "Document"
+                            }
+                        },
+                        {
+                            "data": {
+                                "name": "Resume.doc",
+                                "size": "25kb",
+                                "type": "Resume"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "data": {
+                        "name": "Home",
+                        "size": "20kb",
+                        "type": "Folder"
+                    },
+                    "children": [
+                        {
+                            "data": {
+                                "name": "Invoices",
+                                "size": "20kb",
+                                "type": "Text"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "data": {
+                "name": "Pictures",
+                "size": "150kb",
+                "type": "Folder"
+            },
+            "children": [
+                {
+                    "data": {
+                        "name": "barcelona.jpg",
+                        "size": "90kb",
+                        "type": "Picture"
+                    }
+                },
+                {
+                    "data": {
+                        "name": "primeui.png",
+                        "size": "30kb",
+                        "type": "Picture"
+                    }
+                },
+                {
+                    "data": {
+                        "name": "optimus.jpg",
+                        "size": "30kb",
+                        "type": "Picture"
+                    }
+                }
+            ]
+        }
+    ];
     @Input() treeData: Node[] = [];
     @Input() maxLevel: number = -1;
     @Input() genresData: GenreGroup[] = [];
@@ -29,6 +112,13 @@ export class BooksComponent implements OnChanges {
                 node.hidden = hidden;
             }
         });
+    }
+    nodeSelect(event) {
+        console.log(event);
+    }
+
+    nodeUnselect(event) {
+        console.log(event);
     }
     collapseKids(parent: Node): void {
         let hidden = !parent.collapsed;
