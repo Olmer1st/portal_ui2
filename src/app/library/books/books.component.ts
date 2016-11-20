@@ -11,88 +11,7 @@ import {TreeNode} from 'primeng/primeng';
     styleUrls: ["books.component.css"]
 })
 export class BooksComponent implements OnChanges {
-    selectedFiles: TreeNode[];
-    files: TreeNode[] =
-    [
-        {
-            "data": {
-                "name": "Documents",
-                "size": "75kb",
-                "type": "Folder"
-            },
-            "children": [
-                {
-                    "data": {
-                        "name": "Work",
-                        "size": "55kb",
-                        "type": "Folder"
-                    },
-                    "children": [
-                        {
-                            "data": {
-                                "name": "Expenses.doc",
-                                "size": "30kb",
-                                "type": "Document"
-                            }
-                        },
-                        {
-                            "data": {
-                                "name": "Resume.doc",
-                                "size": "25kb",
-                                "type": "Resume"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "data": {
-                        "name": "Home",
-                        "size": "20kb",
-                        "type": "Folder"
-                    },
-                    "children": [
-                        {
-                            "data": {
-                                "name": "Invoices",
-                                "size": "20kb",
-                                "type": "Text"
-                            }
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "data": {
-                "name": "Pictures",
-                "size": "150kb",
-                "type": "Folder"
-            },
-            "children": [
-                {
-                    "data": {
-                        "name": "barcelona.jpg",
-                        "size": "90kb",
-                        "type": "Picture"
-                    }
-                },
-                {
-                    "data": {
-                        "name": "primeui.png",
-                        "size": "30kb",
-                        "type": "Picture"
-                    }
-                },
-                {
-                    "data": {
-                        "name": "optimus.jpg",
-                        "size": "30kb",
-                        "type": "Picture"
-                    }
-                }
-            ]
-        }
-    ];
+    selectedBooks: Node[];
     @Input() treeData: Node[] = [];
     @Input() maxLevel: number = -1;
     @Input() genresData: GenreGroup[] = [];
@@ -106,13 +25,13 @@ export class BooksComponent implements OnChanges {
         }
         return null;
     }
-    private updateKids(hidden: boolean, parent: Node, level: number): void {
-        this.treeData.forEach(node => {
-            if (node.level === (level + 1) && node.parent === parent.id) {
-                node.hidden = hidden;
-            }
-        });
-    }
+    // private updateKids(hidden: boolean, parent: Node, level: number): void {
+    //     this.treeData.forEach(node => {
+    //         if (node.level === (level + 1) && node.parent === parent.id) {
+    //             node.hidden = hidden;
+    //         }
+    //     });
+    // }
     nodeSelect(event) {
         console.log(event);
     }
@@ -120,26 +39,26 @@ export class BooksComponent implements OnChanges {
     nodeUnselect(event) {
         console.log(event);
     }
-    collapseKids(parent: Node): void {
-        let hidden = !parent.collapsed;
-        let kidsCollapsibles = this.treeData.filter(node => {
-            return node.type > 1 && node.parent === parent.id;
-        });
-        if (kidsCollapsibles && kidsCollapsibles.length) {
-            kidsCollapsibles.forEach(node => {
-                this.updateKids(hidden, node, node.level);
-                node.hidden = node.collapsed = hidden;
-            });
-        } else {
-            this.updateKids(hidden, parent, parent.level);
-        }
-        parent.collapsed = hidden;
-
-        // let level = this.maxLevel - parent.level;
-        // if(level){
-        //
-        // }
-    }
+    // collapseKids(parent: Node): void {
+    //     let hidden = !parent.collapsed;
+    //     let kidsCollapsibles = this.treeData.filter(node => {
+    //         return node.type > 1 && node.parent === parent.id;
+    //     });
+    //     if (kidsCollapsibles && kidsCollapsibles.length) {
+    //         kidsCollapsibles.forEach(node => {
+    //             this.updateKids(hidden, node, node.level);
+    //             node.hidden = node.collapsed = hidden;
+    //         });
+    //     } else {
+    //         this.updateKids(hidden, parent, parent.level);
+    //     }
+    //     parent.collapsed = hidden;
+    //
+    //     // let level = this.maxLevel - parent.level;
+    //     // if(level){
+    //     //
+    //     // }
+    // }
     ngOnChanges(changes: SimpleChanges): void {
         let propgenresData = changes["genresData"];
         if (propgenresData && propgenresData.currentValue) {

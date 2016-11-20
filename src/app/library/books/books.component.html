@@ -41,9 +41,10 @@
     </tbody>
 </table> -->
 
-<p-treeTable [value]="files" selectionMode="multiple" [(selection)]="selectedFiles"
+<p-treeTable [value]="treeData" selectionMode="multiple" [(selection)]="selectedBooks"
     (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)">
-    <p-column field="name" header="Name"></p-column>
-    <p-column field="size" header="Size"></p-column>
-    <p-column field="type" header="Type"></p-column>
+    <p-column field="title" header="Title"></p-column>
+    <!-- <p-column field="size" header="#"></p-column>
+    <p-column field="type" header="Size"></p-column>
+    <p-column field="type" header="Size"></p-column> -->
 </p-treeTable>

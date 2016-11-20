@@ -24,14 +24,16 @@ export interface GenreInfo {
 }
 
 export interface Node {
-    id: string;
-    title: string;
-    type: NodeType;
-    level: number;
-    collapsed: boolean;
-    bookInfo: BookInfo;
-    parent: string;
-    hidden: boolean;
+    data:any;
+    // id: string;
+    // title: string;
+    // type: NodeType;
+    children: Node[];
+    //level: number;
+    //collapsed: boolean;
+    // bookInfo: BookInfo;
+    //parent: string;
+    //hidden: boolean;
 }
 
 export enum NodeType {
