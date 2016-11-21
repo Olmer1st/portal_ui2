@@ -43,8 +43,20 @@
 
 <p-treeTable [value]="treeData" selectionMode="multiple" [(selection)]="selectedBooks"
     (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)">
-    <p-column field="title" header="Title"></p-column>
-    <!-- <p-column field="size" header="#"></p-column>
-    <p-column field="type" header="Size"></p-column>
-    <p-column field="type" header="Size"></p-column> -->
+    <p-column field="title" header="Title" [style]="{'width':'60%'}"></p-column>
+    <p-column header="#"  [style]="{'width':'10%'}">
+        <template let-node="rowData" pTemplate type="body">
+            {{(node.data.bookInfo) ? (node.data.bookInfo.serno) : ""}}
+        </template>
+    </p-column>
+    <p-column  header="Size" [style]="{'width':'15%'}">
+        <template let-node="rowData" pTemplate type="body">
+            {{(node.data.bookInfo) ? (node.data.bookInfo.size | fileSize) : ""}}
+        </template>
+    </p-column>
+    <p-column  header="Inserted Date" [style]="{'width':'auto'}">
+        <template let-node="rowData" pTemplate type="body">
+            {{(node.data.bookInfo) ? (node.data.bookInfo.date) : ""}}
+        </template>
+    </p-column>
 </p-treeTable>

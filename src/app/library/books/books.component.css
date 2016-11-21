@@ -20,6 +20,14 @@
     text-align: left;
 }
 
+:host /deep/ .ui-state-default {
+    max-width: 500px !important;
+}
+
+:host /deep/ .ui-state-default .title{
+    width: 500px !important;
+}
+
 
 :host table.scroll {
     width: 100%;
