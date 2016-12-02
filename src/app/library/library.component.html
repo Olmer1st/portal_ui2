@@ -6,7 +6,9 @@
                 <template [ngSwitchCase]="'authors'">
                     <authors-section (onAuthorClicked)="onAuthorClicked($event)" [activity]="currentActivity"></authors-section>
                 </template>
-                <div *ngSwitchCase="'series'">{{currentActivityKey}}</div>
+                <template [ngSwitchCase]="'series'">
+                    <series-section (onSerieClicked)="onSerieClicked($event)" [language]="language" [activity]="currentActivity"></series-section>
+                </template>
                 <template [ngSwitchCase]="'genres'">
                     <genres-section (onGenreClicked)="onGenreClicked($event)" [activity]="currentActivity" [genresData]="genreGroups" [multiSelect]="false"></genres-section>
                 </template>
@@ -21,7 +23,9 @@
                     <template [ngSwitchCase]="'authors'">
                         <author-info [author]="author" [booksCount]="treeInfo.totalBooks"></author-info>
                     </template>
-                    <div *ngSwitchCase="'series'">{{currentActivityKey}}</div>
+                    <template [ngSwitchCase]="'series'">
+                        <serie-info [serie]="serie" [booksCount]="treeInfo.totalBooks"></serie-info>
+                    </template>
                     <template [ngSwitchCase]="'genres'">
                         <genre-info [genre]="genre" [booksCount]="treeInfo.totalBooks"></genre-info>
                     </template>

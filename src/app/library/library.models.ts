@@ -10,6 +10,10 @@ export interface TreeInfo {
     maxLevel: number;
     treeData: Node[];
 }
+export interface SeriesDataInfo {
+    totalItems: number;
+    series: Serie[];
+}
 
 export interface GenreGroup {
     details: GenreInfo;
@@ -60,6 +64,11 @@ export interface BookInfo {
 export interface Author {
     aid: number;
     fullname: string;
+}
+
+export interface Serie {
+    sid: number;
+    serie_name: string;
 }
 
 export interface ToolBarButton {

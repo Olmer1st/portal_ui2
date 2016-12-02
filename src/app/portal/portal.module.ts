@@ -18,6 +18,8 @@ import {ToolbarComponent} from '../library/toolbar/toolbar.component';
 import {LanguageComponent} from '../library/language/language.component';
 import {AuthorsComponent} from '../library/authors/authors.component';
 import {AuthorInfoComponent} from '../library/authors/author.info.component';
+import {SeriesComponent} from '../library/series/series.component';
+import {SerieInfoComponent} from '../library/series/serie.info.component';
 import {GenresComponent} from '../library/genres/genres.component';
 import {GenreInfoComponent} from '../library/genres/genre.info.component';
 import {BooksComponent} from '../library/books/books.component';
@@ -60,6 +62,8 @@ import { GenreFilterPipe } from '../library/genres/genre.filter.pipe';
         GenreFilterPipe,
         GenresComponent,
         GenreInfoComponent,
+        SeriesComponent,
+        SerieInfoComponent
     ],
     providers: [
         { provide: APP_CONFIG, useValue: PORTAL_CONFIG },

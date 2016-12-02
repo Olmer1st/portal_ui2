@@ -1,0 +1,18 @@
+<table class="w100">
+    <tr>
+        <td>
+            <searchbox-section placeholder="Series" (onSearch)="onSearchClicked($event)" (onClear)="onClearClicked()" [searchParam]="searchParam"></searchbox-section>
+        </td>
+    </tr>
+    <tr>
+        <td>
+
+            <div class="list-group max-div-height">
+                <pagination previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [totalItems]="totalItems" [(ngModel)]="currentPage" [maxSize]="maxSize" [itemsPerPage]="40" class="pagination-sm" [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"></pagination>
+                <a class="pointer list-group-item" *ngFor="let serie of series" (click)="serieClick(serie)" [ngClass]="{'active': (selectedSerie)?serie.sid === selectedSerie.sid:false}">{{serie.serie_name}}</a>
+                <pagination previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [totalItems]="totalItems" [(ngModel)]="currentPage" [maxSize]="maxSize" [itemsPerPage]="40" class="pagination-sm" [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"></pagination>
+            </div>
+
+        </td>
+    </tr>
+</table>

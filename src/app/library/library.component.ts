@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
 import {LibraryService} from './library.service';
-import {ToolBarButton, SideBarState, Author, TreeInfo, GenreGroup, GenreInfo} from './library.models';
+import {ToolBarButton, SideBarState, Author, TreeInfo, GenreGroup, GenreInfo, Serie} from './library.models';
 import {EmitterService} from '../shared/emitter.service';
 
 @Component({
@@ -16,6 +16,7 @@ export class LibraryComponent implements OnDestroy, OnInit {
     genreGroups: GenreGroup[] = [];
     author: Author = null;
     genre: GenreInfo = null;
+    serie: Serie = null;
     treeInfo: TreeInfo = {
         totalIds: 0,
         totalBooks: 0,
@@ -51,6 +52,10 @@ export class LibraryComponent implements OnDestroy, OnInit {
     onAuthorClicked(author: Author): void {
         this.author = author;
         this.loadBooks();
+    }
+    onSerieClicked(serie: Serie): void {
+        this.serie = serie;
+        //this.loadBooks();
     }
     private loadGenres(): void {
         this._libraryService.getGenres()
