@@ -6,11 +6,16 @@
     </tr>
     <tr>
         <td>
-
+            <spinner-section *ngIf="loadingData"></spinner-section>
             <div class="list-group max-div-height">
-                <pagination previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [totalItems]="totalItems" [(ngModel)]="currentPage" [maxSize]="maxSize" [itemsPerPage]="40" class="pagination-sm" [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"></pagination>
+                <div  *ngIf="!isSearch" class="list-group-item">
+                    <pagination previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [totalItems]="totalItems" [(ngModel)]="currentPage" [maxSize]="maxSize" [itemsPerPage]="40" class="pagination-sm" [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"></pagination>
+                </div>
                 <a class="pointer list-group-item" *ngFor="let serie of series" (click)="serieClick(serie)" [ngClass]="{'active': (selectedSerie)?serie.sid === selectedSerie.sid:false}">{{serie.serie_name}}</a>
-                <pagination previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [totalItems]="totalItems" [(ngModel)]="currentPage" [maxSize]="maxSize" [itemsPerPage]="40" class="pagination-sm" [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"></pagination>
+                <div  *ngIf="!isSearch" class="list-group-item">
+                    <pagination previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [totalItems]="totalItems" [(ngModel)]="currentPage" [maxSize]="maxSize" [itemsPerPage]="40" class="pagination-sm" [boundaryLinks]="true" [rotate]="false"></pagination>
+                </div>
+
             </div>
 
         </td>

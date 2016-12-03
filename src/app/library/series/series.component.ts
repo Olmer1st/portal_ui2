@@ -1,5 +1,5 @@
 import {Component, Output, Input, EventEmitter, OnInit} from '@angular/core';
-import { Serie, ToolBarButton , SeriesDataInfo} from '../library.models';
+import { Serie, ToolBarButton, SeriesDataInfo} from '../library.models';
 import { ActivityComponent} from '../activity.component';
 import {LibraryService} from '../library.service';
 import { Observable } from 'rxjs/Observable';
@@ -18,6 +18,8 @@ export class SeriesComponent extends ActivityComponent implements OnInit {
     maxSize: number = 7;
     totalItems: number = 0;
     currentPage: number = 1;
+    loadingData: boolean = false;
+    isSearch: boolean = false;
     get searchParam(): string {
         return this.getInfoFromActivity<string>("searchParam", "");
     }
@@ -26,32 +28,41 @@ export class SeriesComponent extends ActivityComponent implements OnInit {
         super();
     }
     onSearchClicked(searchParam: string): void {
-        this.setInfoForActivity("searchParam", searchParam);
-        this._libraryService.getSearchSeries(searchParam, this.language)
+        //this.setInfoForActivity("searchParam", searchParam);
+        this.loadingData = true;
+        this.isSearch = true;
+        this._libraryService.getSearchSeries(this.language, searchParam)
             .subscribe(series => {
                 this.series = series;
-                this.setInfoForActivity<Serie[]>("series", series);
+                this.loadingData = false;
+                //this.setInfoForActivity<Serie[]>("series", series);
             }, //Bind to view
             err => {
                 // Log errors if any
                 console.log(err);
+                this.loadingData = false;
             });
     }
     onClearClicked(): void {
         this.series = [];
-        this.setInfoForActivity<string>("searchParam", "");
-        this.setInfoForActivity<Serie[]>("series", []);
+        this.isSearch = false;
+        this.loadSeries();
+        //this.setInfoForActivity<string>("searchParam", "");
+        // this.setInfoForActivity<Serie[]>("series", []);
     }
     private loadSeries(page: number = 1) {
+        this.loadingData = true;
         this._libraryService.getAllSeries(this.language, page)
             .subscribe(seriesData => {
                 this.series = seriesData.series;
                 this.totalItems = seriesData.totalItems;
-                this.setInfoForActivity<Serie[]>("series", this.series);
+                //this.setInfoForActivity<number>("currentPage", this.currentPage);
+                this.loadingData = false;
             }, //Bind to view
             err => {
                 // Log errors if any
                 console.log(err);
+                this.loadingData = false;
             });
     }
     serieClick(serie: Serie): void {
@@ -59,16 +70,14 @@ export class SeriesComponent extends ActivityComponent implements OnInit {
         this.onSerieClicked.emit(serie);
     }
     ngOnInit(): void {
-        this.series = this.getInfoFromActivity<Serie[]>("series", []);
-        if (!this.series || !this.series.length) {
-            this.loadSeries();
-        }
+        // this.currentPage = this.getInfoFromActivity<number>("currentPage", 1);
+        this.loadSeries(this.currentPage);
     }
 
     pageChanged(event: any): void {
         console.log('Page changed to: ' + event.page);
         console.log('Number items per page: ' + event.itemsPerPage);
-        this.loadSeries( event.page);
+        this.loadSeries(event.page);
     };
 
 

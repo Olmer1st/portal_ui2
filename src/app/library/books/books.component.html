@@ -1,3 +1,16 @@
+
+<template #toolTipTemplate let-model="model">
+    <div *ngIf="model.book && model.genres">
+        <h5>Language: <span><strong>{{ model.book.lang}}</strong></span></h5>
+        <hr />
+        <span *ngIf="model.book.genre">
+            <h5>Genre: </h5>
+            <div *ngFor="let code of model.book.genre.split(':')">
+                 {{(model.genres[code])?model.genres[code].gdesc:""}}
+             </div>
+        </span>
+    </div>
+</template>
 <p-treeTable [value]="treeData" selectionMode="multiple" [(selection)]="selectedBooks"
     (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeUnselect($event)">
     <p-column field="title" header="Title" [style]="{'width':'60%'}"></p-column>
@@ -6,14 +19,19 @@
             {{(node.data.bookInfo) ? (node.data.bookInfo.serno) : ""}}
         </template>
     </p-column>
-    <p-column  header="Size" [style]="{'width':'15%'}">
+    <p-column  header="Size" [style]="{'width':'12%'}">
         <template let-node="rowData" pTemplate type="body">
             {{(node.data.bookInfo) ? (node.data.bookInfo.size | fileSize) : ""}}
         </template>
     </p-column>
-    <p-column  header="Inserted Date" [style]="{'width':'auto'}">
+    <p-column  header="Inserted Date" [style]="{'width':'12%'}">
         <template let-node="rowData" pTemplate type="body">
             {{(node.data.bookInfo) ? (node.data.bookInfo.date) : ""}}
+        </template>
+    </p-column>
+    <p-column  header="Details" [style]="{'width':'auto'}">
+        <template let-node="rowData" pTemplate type="body">
+            <span *ngIf="!node.children" class="glyphicon glyphicon-info-sign" aria-hidden="true" [tooltipHtml]="toolTipTemplate" [tooltipContext]="{book:node.data.bookInfo, genres:genres}" [tooltipEnable]="!node.children"></span>
         </template>
     </p-column>
 </p-treeTable>

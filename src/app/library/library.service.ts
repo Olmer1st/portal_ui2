@@ -1,6 +1,6 @@
 import { Injectable, Inject }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Author, Node, TreeInfo , GenreGroup, Serie, SeriesDataInfo}  from './library.models';
+import { Author, Node, TreeInfo, GenreGroup, Serie, SeriesDataInfo}  from './library.models';
 import { APP_CONFIG, AppConfig } from '../portal/portal.providers';
 import {Observable} from 'rxjs/Rx';
 
@@ -56,6 +56,17 @@ export class LibraryService {
             .catch((error: any) => Observable.throw(error || 'Server error'));
 
     }
+    getNodesBySerieId(sid: number, lang: string): Observable<TreeInfo> {
+        const url = `${this.config.apiRootUrl}library/books/serie/${sid}/${lang}`;
+        // ...using get request
+        return this.http.get(url)
+            // ...and calling .json() on the response to return data
+            .map((res: Response) => res.json())
+            //...errors if any
+            .catch((error: any) => Observable.throw(error || 'Server error'));
+
+    }
+
     getSearchSeries(lang: string, search: string): Observable<Serie[]> {
         const url = `${this.config.apiRootUrl}library/series/search/${lang}/${search}`;
         // ...using get request

@@ -55,7 +55,7 @@ export class LibraryComponent implements OnDestroy, OnInit {
     }
     onSerieClicked(serie: Serie): void {
         this.serie = serie;
-        //this.loadBooks();
+        this.loadBooks();
     }
     private loadGenres(): void {
         this._libraryService.getGenres()
@@ -69,6 +69,23 @@ export class LibraryComponent implements OnDestroy, OnInit {
                 }
                 this.loadingData = true;
                 this._libraryService.getNodesByAuthorId(this.author.aid, this.language)
+                    .subscribe(treeInfo => {
+                        //console.log(booksInfo);
+                        this.treeInfo = treeInfo;
+                        this.loadingData = false;
+                    }, //Bind to view
+                    err => {
+                        // Log errors if any
+                        console.log(err);
+                        this.loadingData = false;
+                    });
+                break;
+            case "series":
+                if (!this.serie) {
+                    return;
+                }
+                this.loadingData = true;
+                this._libraryService.getNodesBySerieId(this.serie.sid, this.language)
                     .subscribe(treeInfo => {
                         //console.log(booksInfo);
                         this.treeInfo = treeInfo;
