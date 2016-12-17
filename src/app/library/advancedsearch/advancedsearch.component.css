@@ -1,0 +1,8 @@
+:host /deep/ .ui-select-choices-row > a {
+    color: white !important;
+}
+
+:host /deep/ .dropdown-header {
+    font-size: 16px;
+    font-weight: bold;
+}

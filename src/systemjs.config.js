@@ -26,6 +26,7 @@
             'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
             'moment': 'npm:moment/min/moment-with-locales.js',
             'ng2-bootstrap/ng2-bootstrap': 'npm:ng2-bootstrap/bundles/ng2-bootstrap.umd.js',
+            'ng2-select': 'npm:ng2-select',
             'primeng': 'npm:primeng'
         },
         // packages tells the System loader how to load when no filename and/or no extension
@@ -43,6 +44,10 @@
             },
             'primeng': {
                 defaultExtension: 'js'
+            },
+            'ng2-select': {
+                defaultExtension: 'js',
+                main: 'ng2-select.js'
             }
         }
     });

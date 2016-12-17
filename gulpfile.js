@@ -82,6 +82,7 @@ gulp.task("libs", () => {
             'zone.js/dist/**',
             '@angular/**/bundles/**',
             'ng2-bootstrap/bundles/**',
+            'ng2-select/**/*.js',
             'moment/min/moment-with-locales.js',
             'primeng/**/*.js'
         ], {
