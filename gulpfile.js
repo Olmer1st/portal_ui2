@@ -62,7 +62,7 @@ gulp.task("bootstrap", () => {
 });
 
 gulp.task("primeng", () => {
-    return gulp.src(["resources/themes/afterdark/**",
+    return gulp.src(["resources/themes/darkness/**",
             "resources/primeng.min.css"
         ], {
             cwd: "node_modules/primeng"
